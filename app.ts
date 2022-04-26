@@ -49,7 +49,7 @@ function log(title: string) {
       const result = original.apply(this, args);
       //log the call and result
       console.log(
-        `title${title} ${key} with args ${JSON.stringify(
+        `title: ${title} ${key} with args ${JSON.stringify(
           args
         )} returned ${JSON.stringify(result)}`
       );

@@ -15,34 +15,61 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 //   }
 // }
 //Arguments in method Decorators
-function log(target, key, descriptor) {
-    //   console.log("target", target);
-    var original = descriptor.value;
-    descriptor.value = function () {
-        var args = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            args[_i] = arguments[_i];
-        }
-        //call the original method
-        var result = original.apply(this, args);
-        //log the call, and the result
-        console.log("".concat(key, " with args ").concat(JSON.stringify(args), " returned ").concat(JSON.stringify(result)));
-        return result;
+// function log(target: any, key: any, descriptor: any) {
+//   //   console.log("target", target);
+//   const original = descriptor.value;
+//   descriptor.value = function (...args: any[]) {
+//     //call the original method
+//     const result = original.apply(this, args);
+//     //log the call, and the result
+//     console.log(
+//       `${key} with args ${JSON.stringify(args)} returned ${JSON.stringify(
+//         result
+//       )}`
+//     );
+//     return result;
+//   };
+//   return descriptor;
+// }
+// class calculator {
+//   //using the decorator @log
+//   @log
+//   square(n: number) {
+//     return n * n;
+//   }
+// }
+// const calculators = new calculator();
+// calculators.square(2);
+// calculators.square(4);
+//decorator factory function
+function log(title) {
+    return function (target, key, descriptor) {
+        var original = descriptor.value;
+        descriptor.value = function () {
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i] = arguments[_i];
+            }
+            var result = original.apply(this, args);
+            //log the call and result
+            console.log("title: ".concat(title, " ").concat(key, " with args ").concat(JSON.stringify(args), " returned ").concat(JSON.stringify(result)));
+            return result;
+        };
+        return descriptor;
     };
-    return descriptor;
 }
 var calculator = /** @class */ (function () {
     function calculator() {
     }
-    //using the decorator @log
+    //Using the decoretor arguments function @log
     calculator.prototype.square = function (n) {
         return n * n;
     };
     __decorate([
-        log
+        log("calculator")
     ], calculator.prototype, "square", null);
     return calculator;
 }());
 var calculators = new calculator();
-calculators.square(2);
+calculators.square(8);
 calculators.square(4);
