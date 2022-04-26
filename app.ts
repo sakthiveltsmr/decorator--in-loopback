@@ -59,7 +59,7 @@ function log(title: string) {
   };
 }
 class calculator {
-  //Using the decoretor factory function @log
+  //Using the decoretor arguments function @log
   @log("calculator")
   square(n: number) {
     return n * n;
